@@ -1,5 +1,7 @@
 var image_popover = {
 
+    //This function creates a popover for an image
+    //It expects an img tag
     popover: function( element ){
         if( element.tagName != 'IMG' ){
             console.log('element is not an img');
@@ -11,6 +13,7 @@ var image_popover = {
         }
     },
 
+    //Helper function that creates the DOM elements for the popover
     create: function( source ){
         var overlay = document.createElement('div');
         overlay.setAttribute('id', 'image-popover');
@@ -29,6 +32,7 @@ var image_popover = {
         document.body.appendChild(overlay);
     },
 
+    //Helper function that destroys the popover
     destory: function(){
         document.body.removeChild( document.getElementById('image-popover') );
     }
