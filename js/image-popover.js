@@ -11,6 +11,8 @@ var image_popover = {
         if( !document.getElementById( 'image-popover' ) ){
             this.create( image );
         }
+        //This prevents the page from scrolling
+        return false;
     },
 
     //Helper function that creates the DOM elements for the popover
@@ -18,10 +20,14 @@ var image_popover = {
         var overlay = document.createElement('div');
         overlay.setAttribute('id', 'image-popover');
         overlay.setAttribute('onClick', 'image_popover.destory()');
+        overlay.style.height = this.getDocHeight() + 'px';
+
 
         var img_frame = document.createElement('div');
         img_frame.setAttribute('id', 'image-frame');
         img_frame.setAttribute('class', 'well');
+        var doc = document.documentElement, body = document.body;
+        img_frame.style.marginTop = ((doc && doc.scrollTop  || body && body.scrollTop  || 0) + 100) + 'px';
         overlay.appendChild( img_frame );
 
         var img = document.createElement('img');
@@ -35,5 +41,15 @@ var image_popover = {
     //Helper function that destroys the popover
     destory: function(){
         document.body.removeChild( document.getElementById('image-popover') );
+    },
+
+    //Helper function that gets the height of the document
+    getDocHeight: function() {
+        var D = document;
+        return Math.max(
+            Math.max(D.body.scrollHeight, D.documentElement.scrollHeight),
+            Math.max(D.body.offsetHeight, D.documentElement.offsetHeight),
+            Math.max(D.body.clientHeight, D.documentElement.clientHeight)
+        );
     }
 };
