@@ -28,6 +28,11 @@ var image_popover = {
         img_frame.setAttribute('class', 'well');
         var doc = document.documentElement, body = document.body;
         img_frame.style.marginTop = ((doc && doc.scrollTop  || body && body.scrollTop  || 0) + 100) + 'px';
+
+        document.onscroll = function(){
+            img_frame.style.marginTop = ((doc && doc.scrollTop  || body && body.scrollTop  || 0) + 100) + 'px';
+        }
+
         overlay.appendChild( img_frame );
 
         var img = document.createElement('img');
@@ -41,6 +46,7 @@ var image_popover = {
     //Helper function that destroys the popover
     destory: function(){
         document.body.removeChild( document.getElementById('image-popover') );
+        document.onscroll = null;
     },
 
     //Helper function that gets the height of the document
